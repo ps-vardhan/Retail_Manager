@@ -51,3 +51,31 @@ During the construction of this project, we encountered and solved several criti
 **Error**: Circular redirection or 404 on `/login`.
 **Cause**: We defined a custom login page in Security Config but didn't create the Controller to serve it.
 **Resolution**: Created `LoginController.java` to map the `/login` URL to the `login.html` view.
+
+### 6. Security Configuration
+**Action**: Added `spring-boot-starter-security` and `thymeleaf-extras-springsecurity6` to `pom.xml`.
+**Purpose**: To enable role-based authentication (Admin vs Customer) and control UI visibility.
+
+### 7. Ambiguous Mapping Error (Controller Conflict)
+**Error**: `AmbiguousMatchException: .../login mapped to both LoginController and AuthController`
+**Cause**: We created a new `AuthController` to handle proper database-backed login/signup but forgot to remove the old test `LoginController`.
+**Resolution**: Deleted `LoginController.java` to let `AuthController` handle all authentication requests.
+
+### 8. Missing Admin Dashboard
+**Error**: Redirect to `/admin/dashboard` resulted in 404.
+**Cause**: The controller and view were missing.
+**Resolution**: Created `AdminController.java` and `templates/admin/dashboard.html`.
+
+---
+
+## 🏃‍♂️ How to Run
+
+1.  **Start Application**: 
+    ```bash
+    mvn spring-boot:run
+    ```
+2.  **Access the Application**:
+    -   **Login**: [http://localhost:8081/login](http://localhost:8081/login)
+    -   **Signup**: [http://localhost:8081/signup](http://localhost:8081/signup)
+    -   **Admin Dashboard**: [http://localhost:8081/admin/dashboard](http://localhost:8081/admin/dashboard) (Requires Manual Admin Setup)
+    -   **Shop**: [http://localhost:8081/products](http://localhost:8081/products)
