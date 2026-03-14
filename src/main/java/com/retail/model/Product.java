@@ -26,10 +26,10 @@ public class Product {
     private double[] embedding;
 
     private String mainImageUrl;
-    @Column(columnDefinitions = "Text")
+    @Column(columnDefinition = "Text")
     private String specifications;
     private Double externalRating;
-    private Integer reviewCount
+    private Integer reviewCount;
 
     private BigDecimal price;
 
