@@ -1,5 +1,0 @@
-target/
-*.jar
-*.war
-.vscode/
-startup_error.log
