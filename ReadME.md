@@ -7,7 +7,7 @@
 
 A full-stack retail management framework with Spring Security authentication, automated external product synchronization, and semantic search powered by OpenAI `text-embedding-ada-002` and `pgvector`.
 
-## 🏗 Architecture Overview
+## Architecture Overview
 
 Retail Manager natively integrates strict secure user management, resilient data synchronization, and state-of-the-art AI features into a cohesive backend sequence.
 
@@ -15,7 +15,7 @@ Retail Manager natively integrates strict secure user management, resilient data
 - **Live Product Synchronization (`ProductSyncService.java`):** Administrators can orchestrate automated product ingestion. Driven by Spring WebFlux's reactive `WebClient`, catalog data is securely fetched from the DummyJSON API and intelligently mapped to database entities using Spring Data JPA.
 - **AI-Powered Semantic Search (`AIService.java`):** Deeply integrated directly into the product sync workflow, the system uses Spring AI calling OpenAI's `text-embedding-ada-002` model to transparently generate and attach 1536-dimensional vector embeddings for each new product. These high-dimensional vectors are stored and indexed within PostgreSQL using the `pgvector` extension taking advantage of an `HNSW` index. When users perform a search, their literal queries are embedded in real-time and rapidly evaluated against the catalog using Cosine Distance, surfacing mathematically relevant semantic matches that exceed traditional keyword capabilities.
 
-## 💻 Tech Stack
+## Tech Stack
 
 - **Framework:** Spring Boot 3.5.11
 - **Security:** Spring Security 6
@@ -26,7 +26,7 @@ Retail Manager natively integrates strict secure user management, resilient data
 - **Embedding Model:** OpenAI `ada-002` (1536 dims)
 - **ORM:** Spring Data JPA / Hibernate
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -65,7 +65,7 @@ spring.ai.vectorstore.pgvector.distance-type=COSINE_DISTANCE
 spring.ai.vectorstore.pgvector.index-type=HNSW
 ```
 
-> ⚠️ **Configuration Note:** Check your `application.properties` and make sure environment variables follow Spring's standard syntax (e.g. `${DB_USERNAME}`) rather than `{$DB_USERNAME}` to prevent connection failures.
+> **Configuration Note:** Check your `application.properties` and make sure environment variables follow Spring's standard syntax (e.g. `${DB_USERNAME}`) rather than `{$DB_USERNAME}` to prevent connection failures.
 
 ### Running the Application
 
@@ -85,7 +85,7 @@ On first startup, `data.sql` idempotently seeds a default admin account using a 
 - **Password:** `password`
 - **Role:** `ADMIN`
 
-## 📚 Reference
+## Reference
 
 ### Data Model
 
