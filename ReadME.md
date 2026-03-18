@@ -1,4 +1,4 @@
-# {AI-Powered Retail Management Platform
+# AI-Powered Retail Management Platform
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.11-brightgreen)
 ![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.0-teal)
