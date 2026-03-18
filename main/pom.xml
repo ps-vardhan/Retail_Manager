@@ -65,13 +65,52 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring AI - OpenAI embeddings -->
+		<!--
+			JDBC template support — required by PgVectorStore autoconfiguration.
+			spring-boot-starter-data-jpa brings Hibernate/EntityManager but does NOT
+			guarantee a JdbcTemplate bean. The pgvector store autoconfig declares a
+			hard dependency on JdbcTemplate, so without this starter the context fails
+			to load with "No qualifying bean of type JdbcTemplate".
+		-->
 		<dependency>
-    		<groupId>org.springframework.ai</groupId>
-    		<artifactId>spring-ai-openai-spring-boot-starter</artifactId>
-    		<version>1.0.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 
+		<!--
+			Spring AI OpenAI starter — RENAMED in 1.0.0 GA.
+			Old name (only exists up to 1.0.0-M6 on Maven Central):
+			    spring-ai-openai-spring-boot-starter
+			Correct GA name:
+			    spring-ai-starter-model-openai
+
+			No <version> tag here — the spring-ai-bom in dependencyManagement
+			manages the version. Adding an explicit <version> would override the
+			BOM and was the direct cause of the "not found" resolution failure.
+		-->
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-model-openai</artifactId>
+		</dependency>
+
+		<!--
+			Spring AI pgvector store starter — was MISSING from pom.xml entirely.
+			application.properties declared spring.ai.vectorstore.pgvector.*
+			properties, but without this dependency the PgVectorStore autoconfiguration
+			class is not on the classpath, so no VectorStore bean is created.
+			EmbeddingService and AIService both inject VectorStore — the context would
+			fail to start with "No qualifying bean of type VectorStore".
+
+			Renamed in 1.0.0 GA:
+			    spring-ai-pgvector-store-spring-boot-starter  (old, milestone only)
+			  → spring-ai-starter-vector-store-pgvector       (GA name)
+
+			Version managed by BOM — no <version> tag needed.
+		-->
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-vector-store-pgvector</artifactId>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
